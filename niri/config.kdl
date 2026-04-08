@@ -6,6 +6,7 @@ output "eDP-1" {
     position x=0 y=0
     scale 1.0
 }
+// Uncomment for permanent workspaces instead of dynamic
 // workspace "1" { open-on-output "eDP-1"; }
 // workspace "2" { open-on-output "eDP-1"; }
 // workspace "3" { open-on-output "eDP-1"; }
