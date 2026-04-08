@@ -1,7 +1,6 @@
 // ========================
-// MONITOR
+// MONITORS
 // ========================
-prefer-no-csd
 output "eDP-1" {
     mode "1920x1080@144.000"
     position x=0 y=0
@@ -17,6 +16,7 @@ workspace "7" { open-on-output "eDP-1"; }
 workspace "8" { open-on-output "eDP-1"; }
 workspace "9" { open-on-output "eDP-1"; }
 workspace "10" { open-on-output "eDP-1"; }
+prefer-no-csd
 
 // ========================
 // AUTOSTART
