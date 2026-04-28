@@ -1,23 +1,22 @@
 // ========================
-// MONITORS
+// OUTPUT / MONITOR
 // ========================
+prefer-no-csd
 output "eDP-1" {
     mode "1920x1080@144.000"
     position x=0 y=0
-    scale 1.0
+    scale 1.25
 }
-// Uncomment for permanent workspaces instead of dynamic
-// workspace "1" { open-on-output "eDP-1"; }
-// workspace "2" { open-on-output "eDP-1"; }
-// workspace "3" { open-on-output "eDP-1"; }
-// workspace "4" { open-on-output "eDP-1"; }
-// workspace "5" { open-on-output "eDP-1"; }
-// workspace "6" { open-on-output "eDP-1"; }
-// workspace "7" { open-on-output "eDP-1"; }
-// workspace "8" { open-on-output "eDP-1"; }
-// workspace "9" { open-on-output "eDP-1"; }
-// workspace "10" { open-on-output "eDP-1"; }
-prefer-no-csd
+workspace "1" { open-on-output "eDP-1"; }
+workspace "2" { open-on-output "eDP-1"; }
+workspace "3" { open-on-output "eDP-1"; }
+workspace "4" { open-on-output "eDP-1"; }
+workspace "5" { open-on-output "eDP-1"; }
+workspace "6" { open-on-output "eDP-1"; }
+workspace "7" { open-on-output "eDP-1"; }
+workspace "8" { open-on-output "eDP-1"; }
+workspace "9" { open-on-output "eDP-1"; }
+
 
 // ========================
 // AUTOSTART
@@ -26,6 +25,9 @@ spawn-at-startup "dbus-update-activation-environment" "--all"
 spawn-at-startup "qs" "-c" "noctalia-shell"
 spawn-at-startup "blueman-applet"
 spawn-at-startup "nm-applet" "--indicator"
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "DISPLAY" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP=niri"
+spawn-at-startup "systemctl" "--user" "stop" "xdg-desktop-portal" "xdg-desktop-portal-gnome" "xdg-desktop-portal-gtk"
+spawn-at-startup "systemctl" "--user" "start" "xdg-desktop-portal"
 
 // ========================
 // INPUT
@@ -47,7 +49,7 @@ input {
 }
 
 // ========================
-// CUSTOMIZATION
+// LAYOUT / CUSTOMIZATION
 // ========================
 layout {
     border {
@@ -75,7 +77,29 @@ layer-rule {
 window-rule {
     geometry-corner-radius 8
     clip-to-geometry true
+    opacity 1.0
+    background-effect {
+        blur true
+    }
 }
+window-rule {
+    match app-id="^(pcmanfm)$"
+    opacity 0.9
+    background-effect {
+        blur true
+    }
+}
+layer-rule {
+    match namespace="^rofi$"
+    opacity 0.9
+    background-effect {
+        blur true
+    }
+}
+
+// ========================
+// SCREENSHOT PATH
+// ========================
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 // ========================
@@ -83,30 +107,42 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // ========================
 binds {
     Super+Return { spawn "alacritty"; }
-    Ctrl+Alt+T    { spawn "alacritty"; }
+    Ctrl+Alt+T    { spawn "st"; }
     Super+E       { spawn "pcmanfm"; }
     Super+R       { spawn "rofi" "-show" "drun"; }
+    
     Print { spawn "sh" "-c" "grim -g \"$(slurp)\" - | wl-copy"; }
+
+    // Navigation
     Super+Left  { focus-column-left; }
     Super+Right { focus-column-right; }
     Super+Up    { focus-window-up; }
     Super+Down  { focus-window-down; }
+
+    // Moving windows
     Super+Shift+Left  { move-column-left; }
     Super+Shift+Right { move-column-right; }
     Super+Shift+Up    { move-window-up; }
     Super+Shift+Down  { move-window-down; }
+
     Super+F { fullscreen-window; }
     Super+T { toggle-window-floating; }
     Alt+F4  { close-window; }
     Super+Shift+E { quit; }
+
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Shift+F { maximize-column; }
     Alt+Tab { focus-column-right; }
     Alt+Shift+Tab { focus-column-left; }
+    // ========================
+    // AUDIO CONTROLS
+    // ========================
     XF86AudioRaiseVolume  allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
     XF86AudioLowerVolume  allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
     XF86AudioMute         allow-when-locked=true { spawn "wpctl" "set-mute"   "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute      allow-when-locked=true { spawn "wpctl" "set-mute"   "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+    // Workspaces
     Super+1 { focus-workspace 1; }
     Super+2 { focus-workspace 2; }
     Super+3 { focus-workspace 3; }
@@ -117,6 +153,7 @@ binds {
     Super+8 { focus-workspace 8; }
     Super+9 { focus-workspace 9; }
     Super+0 { focus-workspace 10; }
+    
     Super+Shift+1 { move-window-to-workspace 1; }
     Super+Shift+2 { move-window-to-workspace 2; }
     Super+Shift+3 { move-window-to-workspace 3; }
