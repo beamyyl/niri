@@ -103,6 +103,7 @@
             "left": [
                 {
                     "colorizeSystemIcon": "none",
+                    "colorizeSystemText": "none",
                     "customIconPath": "",
                     "enableColorization": false,
                     "icon": "rocket",
@@ -170,6 +171,15 @@
                     "unreadBadgeColor": "primary"
                 },
                 {
+                    "deviceNativePath": "__default__",
+                    "displayMode": "graphic-clean",
+                    "hideIfIdle": false,
+                    "hideIfNotDetected": true,
+                    "id": "Battery",
+                    "showNoctaliaPerformance": false,
+                    "showPowerProfiles": false
+                },
+                {
                     "displayMode": "onhover",
                     "iconColor": "none",
                     "id": "Volume",
@@ -195,15 +205,6 @@
                     ]
                 },
                 {
-                    "deviceNativePath": "__default__",
-                    "displayMode": "graphic-clean",
-                    "hideIfIdle": false,
-                    "hideIfNotDetected": true,
-                    "id": "Battery",
-                    "showNoctaliaPerformance": false,
-                    "showPowerProfiles": false
-                },
-                {
                     "clockColor": "none",
                     "customFont": "",
                     "formatHorizontal": "HH:mm ddd, MMM dd",
@@ -215,11 +216,12 @@
                 {
                     "colorizeDistroLogo": false,
                     "colorizeSystemIcon": "none",
+                    "colorizeSystemText": "none",
                     "customIconPath": "",
-                    "enableColorization": true,
+                    "enableColorization": false,
                     "icon": "adjustments-horizontal",
                     "id": "ControlCenter",
-                    "useDistroLogo": true
+                    "useDistroLogo": false
                 }
             ]
         }
@@ -456,7 +458,7 @@
         "firstDayOfWeek": -1,
         "hideWeatherCityName": false,
         "hideWeatherTimezone": false,
-        "name": "Targoviste, RO",
+        "name": "Tokyo, JP",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
         "showWeekNumberInCalendar": false,
